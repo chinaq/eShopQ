@@ -34,17 +34,40 @@ namespace Ordering.UnitTests.API.Controllers
         public async Task Cancel_order_with_requestId_success()
         {
             //Arrange
-            _mediatorMock.Setup(x => x.Send(It.IsAny<IdentifiedCommand<CancelOrderCommand, bool>>(), default(CancellationToken)))
+            _mediatorMock
+                .Setup(x => x.Send(
+                    It.IsAny<IdentifiedCommand<CancelOrderCommand, bool>>(),
+                    default(CancellationToken)))
                 .Returns(Task.FromResult(true));
 
             //Act
             // var orderController = new OrdersController(_mediatorMock.Object, _orderQueriesMock.Object, _identityServiceMock.Object, _loggerMock.Object);
             var orderController = new OrdersController(_mediatorMock.Object, _loggerMock.Object);
-            var actionResult = await orderController.CancelOrderAsync(new CancelOrderCommand(1), Guid.NewGuid().ToString()) as OkResult;
+            var actionResult = await orderController
+                .CancelOrderAsync(new CancelOrderCommand(1), Guid.NewGuid().ToString()) as OkResult;
 
             //Assert
             Assert.Equal(actionResult.StatusCode, (int)System.Net.HttpStatusCode.OK);
+        }
 
+        [Fact]
+        public async Task Cancel_order_bad_request()
+        {
+            //Arrange
+            _mediatorMock
+                .Setup(x => x.Send(
+                    It.IsAny<IdentifiedCommand<CancelOrderCommand, bool>>(),
+                    default(CancellationToken)))
+                .Returns(Task.FromResult(true));
+
+            //Act
+            // var orderController = new OrdersController(_mediatorMock.Object, _orderQueriesMock.Object, _identityServiceMock.Object, _loggerMock.Object);
+            var orderController = new OrdersController(_mediatorMock.Object, _loggerMock.Object);
+            var actionResult = await orderController
+                .CancelOrderAsync(new CancelOrderCommand(1), String.Empty) as BadRequestResult;
+
+            //Assert
+            Assert.Equal(actionResult.StatusCode, (int)System.Net.HttpStatusCode.BadRequest);
         }
     }
 }

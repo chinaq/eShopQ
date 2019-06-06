@@ -39,29 +39,26 @@ namespace Ordering.API.Controllers
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> CancelOrderAsync([FromBody]CancelOrderCommand command, [FromHeader(Name = "x-requestid")] string requestId)
+        public async Task<IActionResult> CancelOrderAsync(
+            [FromBody]CancelOrderCommand command,
+            [FromHeader(Name = "x-requestid")] string requestId)
         {
             bool commandResult = false;
-
             if (Guid.TryParse(requestId, out Guid guid) && guid != Guid.Empty)
             {
                 var requestCancelOrder = new IdentifiedCommand<CancelOrderCommand, bool>(command, guid);
-
                 // _logger.LogInformation(
                 //     "----- Sending command: {CommandName} - {IdProperty}: {CommandId} ({@Command})",
                 //     requestCancelOrder.GetGenericTypeName(),
                 //     nameof(requestCancelOrder.Command.OrderNumber),
                 //     requestCancelOrder.Command.OrderNumber,
                 //     requestCancelOrder);
-
                 commandResult = await _mediator.Send(requestCancelOrder);
             }
-
             if (!commandResult)
             {
                 return BadRequest();
             }
-
             return Ok();
         }
     }
