@@ -1,4 +1,4 @@
-namespace eShopQ.Services.Ordering.Domain.Seedwork
+namespace Ordering.Domain.SeedWork
 {
     using System;
     using MediatR;

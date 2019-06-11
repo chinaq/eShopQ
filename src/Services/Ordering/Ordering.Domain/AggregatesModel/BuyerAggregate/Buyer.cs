@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using eShopQ.Services.Ordering.Domain.Seedwork;
-using Ordering.Domain.Events;
 using Ordering.Domain.SeedWork;
+using Ordering.Domain.Events;
 
 namespace Ordering.Domain.AggregatesModel.BuyerAggregate
 {

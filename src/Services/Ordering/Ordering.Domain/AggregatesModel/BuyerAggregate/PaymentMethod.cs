@@ -1,5 +1,5 @@
 using System;
-using eShopQ.Services.Ordering.Domain.Seedwork;
+using Ordering.Domain.SeedWork;
 using Ordering.Domain.AggregatesModel.BuyerAggregate;
 
 namespace Ordering.Domain.AggregatesModel.BuyerAggregate
