@@ -2,7 +2,7 @@ dotnet aspnet-codegenerator controller \
     -name CatalogController \
     -api \
     -async \
-    -m Microsoft.eShopOnContainers.Services.Catalog.API.Mode.CatalogItem \
+    -m Microsoft.eShopOnContainers.Services.Catalog.API.Model.CatalogItem \
     -dc CatalogContext \
     -namespace CataLog.API.Controller \
     -outDir Controllers
