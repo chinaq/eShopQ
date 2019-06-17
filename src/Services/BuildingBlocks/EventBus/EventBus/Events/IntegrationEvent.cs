@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Microsoft.eShopOnContainers.BuildingBlocks.EventBus.Events
 {
-    public class IntegrationEvent
+    public abstract class IntegrationEvent
     {
         public IntegrationEvent()
         {
